@@ -1,5 +1,5 @@
 # ZXing Android Sample App
-A tutorial app to generate Barcode or QR-Code using ZXing library in Kotlin
+This is a sample app to generate QR-Code using ZXing library in Kotlin
 ## Screenshots
 ![screen](../master/screenshots/screen.png)
 
