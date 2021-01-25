@@ -4,22 +4,33 @@ import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
-import kotlinx.android.synthetic.main.activity_main.*
 
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var button: Button
+    private lateinit var editText: EditText
+    private lateinit var imageView: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // initializing views
+        button = findViewById(R.id.button)
+        editText = findViewById(R.id.editText)
+        imageView = findViewById(R.id.imageView)
+
         button.setOnClickListener {
             val text = editText.text.toString()
-
             if (text.isNotBlank()) {
                 val bitmap = generateQRCode(text)
                 imageView.setImageBitmap(bitmap)
@@ -39,9 +50,7 @@ class MainActivity : AppCompatActivity() {
                     bitmap.setPixel(x, y, if (bitMatrix[x, y]) Color.BLACK else Color.WHITE)
                 }
             }
-        } catch (e: WriterException) {
-            Log.d(TAG, "generateQRCode: ${e.message}")
-        }
+        } catch (e: WriterException) { Log.d(TAG, "generateQRCode: ${e.message}") }
         return bitmap
     }
 }
