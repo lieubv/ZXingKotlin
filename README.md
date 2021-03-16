@@ -3,12 +3,12 @@ This is a Sample app to generate QR-Code using ZXing library in Kotlin.
 ## Screenshots
 ![screen](../master/screenshots/screen.png)
 
-## Step 1 Add dependency
+## Step 1 : Add dependency
 ```groovy
     implementation 'com.google.zxing:core:3.4.0'
 ```
 
-## Step 2 Add this method
+## Step 2 : Add this method
 ```kotlin
 // copy this method to your class
 private fun generateQRCode(text: String): Bitmap {
@@ -28,7 +28,7 @@ private fun generateQRCode(text: String): Bitmap {
     }
 ```
 
-## Step 3 Use the method
+## Step 3 : Use the method
 ```kotlin
 // replace the sample text
 val bitmap = generateQRCode("Sample Text")
