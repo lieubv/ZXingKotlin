@@ -12,6 +12,11 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 
+/**
+ * Authored by Riyas Valiyadan
+ * Contact me @ https://www.linkedin.com/in/riyasvmc
+ */
+
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
