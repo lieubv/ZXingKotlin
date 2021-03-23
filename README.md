@@ -35,6 +35,9 @@ val bitmap = generateQRCode("Sample Text")
 imageView.setImageBitmap(bitmap)
 ```
 
+## Support 
+https://www.buymeacoffee.com/riyasv
+
 ## Tech
 
 Used following 3rd party libraries 
