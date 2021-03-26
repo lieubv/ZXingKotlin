@@ -1,5 +1,6 @@
 package com.vmcplus.zxingkotlin
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
@@ -7,10 +8,12 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
+import com.google.zxing.integration.android.IntentIntegrator
 
 /**
  * Authored by Riyas Valiyadan
@@ -35,11 +38,12 @@ class MainActivity : AppCompatActivity() {
         imageView = findViewById(R.id.imageView)
 
         button.setOnClickListener {
-            val text = editText.text.toString()
-            if (text.isNotBlank()) {
-                val bitmap = generateQRCode(text)
-                imageView.setImageBitmap(bitmap)
-            }
+//            val text = editText.text.toString()
+//            if (text.isNotBlank()) {
+//                val bitmap = generateQRCode(text)
+//                imageView.setImageBitmap(bitmap)
+//            }
+            scanQRCode()
         }
     }
 
@@ -57,5 +61,29 @@ class MainActivity : AppCompatActivity() {
             }
         } catch (e: WriterException) { Log.d(TAG, "generateQRCode: ${e.message}") }
         return bitmap
+    }
+
+    private fun scanQRCode(){
+        kotlin.run {
+            IntentIntegrator(this).setOrientationLocked(false).initiateScan()
+        }
+//        val integrator = IntentIntegrator(this).apply {
+//            captureActivity = CaptureActivity::class.java
+//            setOrientationLocked(false)
+//            setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES)
+//            setPrompt("Scanning Code")
+//        }
+//        integrator.initiateScan()
+    }
+
+    // Get the results:
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if (result != null) {
+            if (result.contents == null) Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show()
+            else Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+        } else {
+            super.onActivityResult(requestCode, resultCode, data)
+        }
     }
 }
